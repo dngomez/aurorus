@@ -1,0 +1,13 @@
+export const STRAPI_URL = import.meta.env.VITE_STRAPI_URL
+export const STRAPI_TOKEN = import.meta.env.VITE_STRAPI_TOKEN
+
+export async function query(url: string) {
+  const response = await fetch(`${STRAPI_URL}/api/${url}`, {
+    headers: {
+      Authorization: `Bearer ${STRAPI_TOKEN}`,
+    },
+  })
+
+  const json = await response.json()
+  return json.data
+}
