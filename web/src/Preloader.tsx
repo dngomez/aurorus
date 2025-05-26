@@ -6,8 +6,13 @@ export function Preloader({ loadingTime }: { loadingTime: number }) {
   const [done, setDone] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => setLoaded(true), loadingTime)
-    setTimeout(() => setDone(true), loadingTime + 700)
+    const id = setTimeout(() => setLoaded(true), loadingTime)
+    const id2 = setTimeout(() => setDone(true), loadingTime + 700)
+
+    return () => {
+      clearTimeout(id)
+      clearTimeout(id2)
+    }
   }, [])
 
   if (done) return null

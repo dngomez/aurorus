@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode"
 
 export function getUser() {
-  const token = localStorage.getItem("token")
+  const token = sessionStorage.getItem("token")
   if (token) {
     return jwtDecode(token)
   } else {
@@ -10,7 +10,7 @@ export function getUser() {
 }
 
 export function removeUser() {
-  localStorage.removeItem("token")
+  sessionStorage.removeItem("token")
 }
 
 export function setUser(token: string | undefined) {
@@ -18,7 +18,7 @@ export function setUser(token: string | undefined) {
     removeUser()
     return null
   } else {
-    localStorage.setItem("token", token)
+    sessionStorage.setItem("token", token)
     return jwtDecode(token)
   }
 }

@@ -380,13 +380,9 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
     client: Schema.Attribute.Relation<'manyToOne', 'api::client.client'>;
+    code: Schema.Attribute.UID & Schema.Attribute.Required;
     comment: Schema.Attribute.Text;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -394,9 +390,10 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
     email: Schema.Attribute.Email;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'>;
-    number: Schema.Attribute.UID & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'> &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.Enumeration<['table', 'bar']>;
     people: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
@@ -405,7 +402,7 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
         },
         number
       >;
-    phone: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     time: Schema.Attribute.Time & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

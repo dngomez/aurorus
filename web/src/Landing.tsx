@@ -1,13 +1,14 @@
 import { FaCalendarDay, FaInstagram } from "react-icons/fa"
-import { BiWorld } from "react-icons/bi"
 import { Preloader } from "./Preloader.tsx"
 import { NavLink } from "react-router"
+import { IoRestaurant } from "react-icons/io5"
+import { Button } from "./components/ui/button.tsx"
 
 export function Landing() {
   return (
-    <div className="bg-[url('/background.jpg')] bg-cover h-screen">
+    <div className="bg-[url('/background.jpg')] bg-cover min-h-screen">
       <Preloader loadingTime={1500} />
-      <div className="backdrop-blur-sm bg-black/50 w-full h-full flex flex-col justify-center items-center gap-4">
+      <div className="backdrop-blur-sm bg-black/50 w-full min-h-screen flex flex-col justify-center items-center gap-4">
         <h1 className="font-komoda text-white text-center text-9xl border-2 md:border-4 border-white p-4">
           AURORUS
         </h1>
@@ -21,10 +22,10 @@ export function Landing() {
           </NavLink>
           <NavLink
             className="flex flex-row gap-2 w-40 items-center justify-center bg-aurorus p-3 rounded-md text-white transition-colors hover:bg-aurorus/70 border-2 border-transparent focus:bg-aurorus/50 focus:border-aurorus"
-            to="/home"
+            to="/carta"
           >
-            <BiWorld />
-            Página Web
+            <IoRestaurant />
+            Carta
           </NavLink>
           <a
             className="flex flex-row gap-2 w-40 items-center justify-center bg-aurorus p-3 rounded-md text-white transition-colors hover:bg-aurorus/70 border-2 border-transparent focus:bg-aurorus/50 focus:border-aurorus"

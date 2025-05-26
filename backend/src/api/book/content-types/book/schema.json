@@ -10,11 +10,7 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {
-    "i18n": {
-      "localized": true
-    }
-  },
+  "pluginOptions": {},
   "attributes": {
     "date": {
       "type": "date",
@@ -36,23 +32,31 @@
       "type": "email",
       "required": false
     },
-    "phone": {
-      "type": "biginteger",
-      "required": true
-    },
     "confirmed": {
       "type": "boolean",
       "default": false
-    },
-    "number": {
-      "type": "uid",
-      "required": true
     },
     "client": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::client.client",
       "inversedBy": "books"
+    },
+    "location": {
+      "type": "enumeration",
+      "enum": [
+        "table",
+        "bar"
+      ],
+      "pluginOptions": {}
+    },
+    "code": {
+      "type": "uid",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": false
     }
   }
 }

@@ -4,10 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router"
 import "./index.css"
 import { Landing } from "./Landing.tsx"
 import { Layout } from "./Layout.tsx"
-import { Home } from "./Home.tsx"
 import { Book } from "./Book/Book.tsx"
 import { About } from "./About.tsx"
 import { GoogleOAuthProvider } from "@react-oauth/google"
+import { Menu } from "./Menu.tsx"
 
 export const GOOGLE_ID =
   "903378574791-73hj05psel9io872klp7qe33bqkt229g.apps.googleusercontent.com"
@@ -16,11 +16,6 @@ let router = createBrowserRouter([
   {
     path: "/",
     Component: Landing,
-  },
-  {
-    path: "/home",
-    Component: Layout,
-    children: [{ index: true, Component: Home }],
   },
   {
     path: "/reservas",
@@ -41,6 +36,11 @@ let router = createBrowserRouter([
         Component: About,
       },
     ],
+  },
+  {
+    path: "/carta",
+    Component: Layout,
+    children: [{ index: true, Component: Menu }],
   },
 ])
 
