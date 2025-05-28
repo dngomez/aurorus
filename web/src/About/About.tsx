@@ -19,13 +19,13 @@ export function About() {
           <video
             ref={videoRefs[0]}
             controls
-            className="w-1/4 max-h-[600px] rounded-md"
+            className="w-full md:w-1/4 max-h-[600px] rounded-md"
             autoPlay
             onEnded={() => videoRefs[1].current?.play()}
           >
             <source src={VIDEO_URLS[0]} type="video/mp4" />
           </video>
-          <div className="flex flex-col gap-4 w-1/2 text-center">
+          <div className="flex flex-col gap-4 w-full md:w-1/2 text-center">
             <h1>AURORUS</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
@@ -49,7 +49,7 @@ export function About() {
           <video
             ref={videoRefs[1]}
             controls
-            className="w-1/4 max-h-[600px] rounded-md"
+            className="w-full md:w-1/4 max-h-[600px] rounded-md"
             onEnded={() => videoRefs[2].current?.play()}
           >
             <source src={VIDEO_URLS[1]} type="video/mp4" />
