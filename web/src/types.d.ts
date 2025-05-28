@@ -35,3 +35,29 @@ export interface LocationOptionsType {
   value: string
   label: string
 }
+
+export interface DishType {
+  name: string
+  shortDescription: string
+  longDescription: string
+  image: string
+  price: number
+  category: string
+}
+
+export interface BookStateType {
+  location: string
+  locationOptions: LocationOptionsType[]
+  time: string
+  timeOptions: string[]
+  people: number
+  peopleOptions: number[]
+  date: Date | undefined
+  today: Date
+  endDate: Date
+}
+
+export interface BookActionType {
+  type: string
+  payload: any
+}

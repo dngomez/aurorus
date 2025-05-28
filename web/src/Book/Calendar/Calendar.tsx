@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { dateToString } from "@/lib/helpers"
 import { BookType, EventType } from "@/types"
-import { DAYS, MONTHS } from "@/lib/helpers"
+import { DAYS, MONTHS } from "@/constants"
 import { Day } from "./Day"
 
 function isBefore(date: Date, today: Date) {

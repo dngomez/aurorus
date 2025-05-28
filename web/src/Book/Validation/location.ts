@@ -1,19 +1,16 @@
 import { BookType } from "@/types"
+import { dateToString } from "@/lib/helpers"
 import {
-  BAR_PEOPLE,
-  dateToString,
   LOCATION_OPTIONS,
   TABLE_NUMBER,
   TABLE_PEOPLE,
-} from "@/lib/helpers"
+  BAR_PEOPLE,
+} from "@/constants"
 
-export function checkLocationIsAvailable({
-  books,
-  date,
-}: {
-  books: BookType[]
+export function checkLocationIsAvailable(
+  books: BookType[],
   date: Date | undefined
-}) {
+) {
   if (!date) return LOCATION_OPTIONS
 
   // Filter books by date

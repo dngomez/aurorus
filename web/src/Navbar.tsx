@@ -26,6 +26,7 @@ export function Navbar() {
       <ul className={cn("hidden md:flex md:flex-row gap-5")}>
         <li>
           <NavLink
+            viewTransition
             className={cn(
               "text-white flex flex-row gap-1 justify-center items-center",
               "px-2 py-1 relative cursor-pointer",
@@ -42,6 +43,7 @@ export function Navbar() {
         </li>
         <li>
           <NavLink
+            viewTransition
             className={cn(
               "text-white flex flex-row gap-1 justify-center items-center",
               "px-2 py-1 relative cursor-pointer",
@@ -58,6 +60,7 @@ export function Navbar() {
         </li>
         <li>
           <NavLink
+            viewTransition
             className={cn(
               "text-white flex flex-row gap-1 justify-center items-center",
               "px-2 py-1 relative cursor-pointer",
@@ -130,7 +133,7 @@ export function Navbar() {
                 "hover:after:scale-100 after:transition-all after:duration-300"
               )}
               onClick={() => {
-                navigate("/reservas")
+                navigate("/reservas", { viewTransition: true })
                 setShowMenu(false)
               }}
             >
@@ -149,7 +152,7 @@ export function Navbar() {
                 "hover:after:scale-100 after:transition-all after:duration-300"
               )}
               onClick={() => {
-                navigate("/nosotros")
+                navigate("/nosotros", { viewTransition: true })
                 setShowMenu(false)
               }}
             >
@@ -168,7 +171,7 @@ export function Navbar() {
                 "hover:after:scale-100 after:transition-all after:duration-300"
               )}
               onClick={() => {
-                navigate("/carta")
+                navigate("/carta", { viewTransition: true })
                 setShowMenu(false)
               }}
             >

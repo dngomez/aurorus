@@ -3,6 +3,7 @@ import { Preloader } from "./Preloader.tsx"
 import { NavLink } from "react-router"
 import { IoRestaurant } from "react-icons/io5"
 import { Button } from "./components/ui/button.tsx"
+import { cn } from "./lib/utils.ts"
 
 export function Landing() {
   return (
@@ -14,21 +15,39 @@ export function Landing() {
         </h1>
         <div className="flex flex-col md:flex-row gap-3">
           <NavLink
-            className="flex flex-row gap-2 w-40 items-center justify-center bg-aurorus p-3 rounded-md text-white transition-colors hover:bg-aurorus/70 border-2 border-transparent focus:bg-aurorus/50 focus:border-aurorus"
+            className={cn(
+              "flex flex-row gap-2 w-40 items-center justify-center",
+              "bg-aurorus p-3 rounded-md text-white transition-colors",
+              "hover:bg-aurorus/70 border-2 border-transparent",
+              "hover:border-accent hover:text-accent",
+              "focus:bg-aurorus/50 focus:border-aurorus"
+            )}
             to="/reservas"
           >
             <FaCalendarDay />
             Reservas
           </NavLink>
           <NavLink
-            className="flex flex-row gap-2 w-40 items-center justify-center bg-aurorus p-3 rounded-md text-white transition-colors hover:bg-aurorus/70 border-2 border-transparent focus:bg-aurorus/50 focus:border-aurorus"
+            className={cn(
+              "flex flex-row gap-2 w-40 items-center justify-center",
+              "bg-aurorus p-3 rounded-md text-white transition-colors",
+              "hover:bg-aurorus/70 border-2 border-transparent",
+              "hover:border-accent hover:text-accent",
+              "focus:bg-aurorus/50 focus:border-aurorus"
+            )}
             to="/carta"
           >
             <IoRestaurant />
             Carta
           </NavLink>
           <a
-            className="flex flex-row gap-2 w-40 items-center justify-center bg-aurorus p-3 rounded-md text-white transition-colors hover:bg-aurorus/70 border-2 border-transparent focus:bg-aurorus/50 focus:border-aurorus"
+            className={cn(
+              "flex flex-row gap-2 w-40 items-center justify-center",
+              "bg-aurorus p-3 rounded-md text-white transition-colors",
+              "hover:bg-aurorus/70 border-2 border-transparent",
+              "hover:border-accent hover:text-accent",
+              "focus:bg-aurorus/50 focus:border-aurorus"
+            )}
             href="https://www.instagram.com/aurorus.rest/"
           >
             <FaInstagram />
