@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { DishType } from "@/types"
+import { DialogTitle } from "@/components/ui/dialog"
 
 export function DishDialog({ dish }: { dish: DishType }) {
   return (
@@ -15,9 +16,7 @@ export function DishDialog({ dish }: { dish: DishType }) {
           "transition-colors"
         )}
       >
-        <h1 className="text-2xl font-bold group-hover:text-accent transition-colors">
-          {dish.name}
-        </h1>
+        <DialogTitle>{dish.name}</DialogTitle>
         <p>
           Long description about {dish.longDescription} Lorem ipsum dolor sit,
           amet consectetur adipisicing elit. Molestias, tempora illum!

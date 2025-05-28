@@ -1,5 +1,5 @@
 import { Outlet } from "react-router"
-import { Navbar } from "./Navbar"
+import { Navbar } from "./components/Navbar/Navbar"
 import { Toaster } from "./components/ui/sonner"
 
 export function Layout() {

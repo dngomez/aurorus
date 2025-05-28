@@ -9,7 +9,7 @@ export function Menu() {
   const refs = CATEGORIES.map(() => useRef<HTMLElement>(null))
 
   return (
-    <Layout title="Menu">
+    <Layout title="Carta">
       <div className={cn("flex flex-row flex-wrap gap-2 justify-center")}>
         {CATEGORIES.map((category) => (
           <button
