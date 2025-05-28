@@ -34,6 +34,7 @@ export function Book() {
   useEffect(() => {
     getBooksInRange(today, endDate).then((books) => {
       setBooks(books)
+      // TODO: Calculate free spaces for each day
     })
 
     getEventsInRange(today, endDate).then((events) => {
@@ -50,7 +51,6 @@ export function Book() {
   function newBook() {
     const bookCode = Math.floor(new Date().getTime() / 1000).toString(36)
 
-    // TODO: Create book
     createBook({
       date: dateToString(date!),
       time,
@@ -87,6 +87,7 @@ export function Book() {
         <div className="flex flex-col gap-4 w-full md:w-1/2 lg:w-1/3">
           <h1 className="text-white text-2xl font-bold">Nueva reserva</h1>
           <Calendar
+            startDate={today}
             selected={date}
             onSelect={setDate}
             currentBooks={books}

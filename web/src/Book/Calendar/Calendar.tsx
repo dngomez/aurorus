@@ -21,6 +21,7 @@ function isEventDay(events: EventType[], date: Date) {
 }
 
 export function Calendar({
+  startDate,
   selected,
   onSelect,
   currentBooks,
@@ -28,6 +29,7 @@ export function Calendar({
   maxBookDays,
   latestBookHour,
 }: {
+  startDate: Date
   selected: Date | undefined
   onSelect: (date: Date) => void
   currentBooks: BookType[]
@@ -35,15 +37,11 @@ export function Calendar({
   maxBookDays: number
   latestBookHour: number
 }) {
-  const today = new Date()
-  const month = today.getMonth()
-  const startDate = new Date(today)
-  const FILL = today.getDay() - 1
-  startDate.setDate(today.getDate() - FILL)
-  const shouldStartToday = today.getHours() < latestBookHour
-  const TOTAL_DAYS = maxBookDays + FILL
-  const endDate = new Date(startDate)
-  endDate.setDate(startDate.getDate() + TOTAL_DAYS)
+  const month = startDate.getMonth()
+  const sDate = new Date(startDate)
+  const FILL = startDate.getDay() - 1
+  sDate.setDate(startDate.getDate() - FILL)
+  const shouldStartToday = startDate.getHours() < latestBookHour
 
   const days = DAYS.map((day, idx) => {
     return (
@@ -54,29 +52,27 @@ export function Calendar({
   })
 
   const calendarDays = []
-  for (let i = 0; i < TOTAL_DAYS; i++) {
+  for (let i = 0; i < maxBookDays; i++) {
     // Create Calendar Days
     calendarDays.push(
       <Day
         key={i}
         selected={selected}
         onSelect={onSelect}
-        books={currentBooks.filter(
-          (book) => book.date === dateToString(startDate)
-        )}
-        day={new Date(startDate)}
-        isToday={isToday(startDate, today)}
+        books={currentBooks.filter((book) => book.date === dateToString(sDate))}
+        day={new Date(sDate)}
+        isToday={isToday(sDate, startDate)}
         disabled={
-          isBefore(startDate, today) ||
-          (isToday(startDate, today) && !shouldStartToday) ||
-          isEventDay(currentEvents, startDate) ||
-          startDate.getDay() === 1 // Monday is disabled
+          isBefore(sDate, startDate) ||
+          (isToday(sDate, startDate) && !shouldStartToday) ||
+          isEventDay(currentEvents, sDate) ||
+          sDate.getDay() === 1 // Monday is disabled
         }
       />
     )
 
     // Move to next day
-    startDate.setDate(startDate.getDate() + 1)
+    sDate.setDate(sDate.getDate() + 1)
   }
 
   return (
