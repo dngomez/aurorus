@@ -1,9 +1,20 @@
 import { Layout } from "@/components/Layout"
-import { DISHES, CATEGORIES } from "@/constants"
+import { DISHES } from "@/constants"
 import { Category } from "./Category"
 import { cn } from "@/lib/utils"
-import { PiBowlFoodBold } from "react-icons/pi"
 import { useRef } from "react"
+import { PiBowlFoodBold } from "react-icons/pi"
+import { FaIceCream } from "react-icons/fa"
+import { LuSalad } from "react-icons/lu"
+import { BiDrink } from "react-icons/bi"
+import { capitalizeWord } from "@/lib/helpers"
+
+const CATEGORIES = [
+  { name: "entrada", icon: <LuSalad /> },
+  { name: "fondo", icon: <PiBowlFoodBold /> },
+  { name: "postre", icon: <FaIceCream /> },
+  { name: "bebida", icon: <BiDrink /> },
+]
 
 export function Menu() {
   const refs = CATEGORIES.map(() => useRef<HTMLElement>(null))
@@ -13,7 +24,7 @@ export function Menu() {
       <div className={cn("flex flex-row flex-wrap gap-2 justify-center")}>
         {CATEGORIES.map((category) => (
           <button
-            key={category}
+            key={category.name}
             onClick={() =>
               refs[CATEGORIES.indexOf(category)].current?.scrollIntoView()
             }
@@ -26,8 +37,8 @@ export function Menu() {
               "cursor-pointer"
             )}
           >
-            <PiBowlFoodBold />
-            {category.toUpperCase()}
+            {category.icon}
+            {capitalizeWord(category.name)}
           </button>
         ))}
       </div>
@@ -35,9 +46,10 @@ export function Menu() {
         {CATEGORIES.map((category) => (
           <Category
             refProps={refs[CATEGORIES.indexOf(category)]}
-            key={category}
-            category={category}
-            dishes={DISHES.filter((dish) => dish.category === category)}
+            key={category.name}
+            category={capitalizeWord(category.name)}
+            icon={category.icon}
+            dishes={DISHES.filter((dish) => dish.category === category.name)}
           />
         ))}
       </div>

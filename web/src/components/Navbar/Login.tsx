@@ -16,7 +16,9 @@ export function Login() {
       </DialogTrigger>
       <DialogContent className="bg-black border-gray-700 text-white min-w-2/3">
         <DialogTitle>Login</DialogTitle>
-        <DialogDescription>Sign in to your account</DialogDescription>
+        <DialogDescription className="text-white text-md">
+          En construcción
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   )

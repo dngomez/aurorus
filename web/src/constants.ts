@@ -16,26 +16,24 @@ export const DAYS = [
 ]
 
 export const MONTHS = [
-  { letter: "E", name: "Enero", number: 1 },
-  { letter: "F", name: "Febrero", number: 2 },
-  { letter: "M", name: "Marzo", number: 3 },
-  { letter: "A", name: "Abril", number: 4 },
-  { letter: "M", name: "Mayo", number: 5 },
-  { letter: "J", name: "Junio", number: 6 },
-  { letter: "J", name: "Julio", number: 7 },
-  { letter: "A", name: "Agosto", number: 8 },
-  { letter: "S", name: "Septiembre", number: 9 },
-  { letter: "O", name: "Octubre", number: 10 },
-  { letter: "N", name: "Noviembre", number: 11 },
-  { letter: "D", name: "Diciembre", number: 12 },
+  { letter: "Ene", name: "Enero", number: 1 },
+  { letter: "Feb", name: "Febrero", number: 2 },
+  { letter: "Mar", name: "Marzo", number: 3 },
+  { letter: "Abr", name: "Abril", number: 4 },
+  { letter: "May", name: "Mayo", number: 5 },
+  { letter: "Jun", name: "Junio", number: 6 },
+  { letter: "Jul", name: "Julio", number: 7 },
+  { letter: "Ago", name: "Agosto", number: 8 },
+  { letter: "Sep", name: "Septiembre", number: 9 },
+  { letter: "Oct", name: "Octubre", number: 10 },
+  { letter: "Nov", name: "Noviembre", number: 11 },
+  { letter: "Dic", name: "Diciembre", number: 12 },
 ]
 
 export const LOCATION_OPTIONS = [
   { value: "bar", label: "Barra" },
   { value: "table", label: "Mesa" },
 ]
-
-export const CATEGORIES = ["entrada", "fondo", "postre", "bebida"]
 
 export const DISHES = [
   {
