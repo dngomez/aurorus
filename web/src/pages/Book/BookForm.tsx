@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { BookActionType, BookStateType, BookType, EventType } from "@/types"
 import { LATEST_BOOK_HOUR, MAX_BOOK_DAYS } from "@/constants"
 import { newBook } from "./bookReducer"
+import { cn } from "@/lib/utils"
 
 export function BookForm({
   books,
@@ -19,7 +20,12 @@ export function BookForm({
   bookDispatch: (_: BookActionType) => void
 }) {
   return (
-    <div className="flex flex-col gap-4 w-full md:w-1/2 lg:w-1/3 bg-black/60 p-4">
+    <div
+      className={cn(
+        "flex flex-col gap-4 w-full md:w-1/2 lg:w-1/3",
+        "bg-black/60 p-4 text-center"
+      )}
+    >
       <h1 className="text-white text-2xl font-bold">Nueva reserva</h1>
       <Calendar
         startDate={bookState.today}

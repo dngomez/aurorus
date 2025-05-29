@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
@@ -15,6 +16,7 @@ export function Login() {
       </DialogTrigger>
       <DialogContent className="bg-black border-gray-700 text-white min-w-2/3">
         <DialogTitle>Login</DialogTitle>
+        <DialogDescription>Sign in to your account</DialogDescription>
       </DialogContent>
     </Dialog>
   )
