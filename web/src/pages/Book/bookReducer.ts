@@ -1,8 +1,12 @@
 import { LOCATION_OPTIONS, MAX_BOOK_DAYS } from "@/constants"
 import { dateToString } from "@/lib/helpers"
 import { createBook } from "@/strapi/book"
-import { BookActionType, BookStateType, BookType } from "@/types"
-import { toast } from "sonner"
+import type {
+  BookActionType,
+  BookStateType,
+  BookType,
+  DialogStateType,
+} from "@/types"
 
 export function bookReducer(state: BookStateType, action: BookActionType) {
   switch (action.type) {
@@ -25,7 +29,10 @@ export function bookReducer(state: BookStateType, action: BookActionType) {
   }
 }
 
-export function newBook(book: BookStateType) {
+export function newBook(
+  book: BookStateType,
+  setDialogState: (state: DialogStateType) => void
+) {
   const bookCode = Math.floor(new Date().getTime() / 1000).toString(36)
 
   createBook({
@@ -35,17 +42,31 @@ export function newBook(book: BookStateType) {
     people: book.people,
     phone: "123456789",
     code: bookCode,
-  } as BookType).then((book) => {
-    if (book !== null) {
-      toast.success(
-        `Su reserva ha sido creada con código de reserva: ${book.code}. Por favor guarde este número de reserva para futuras referencias y cancelaciones.`
-      )
-    } else {
-      toast.error(
-        "Ha ocurrido un error al crear su reserva. Por favor inténtelo de nuevo."
-      )
-    }
-  })
+  } as BookType)
+    .then((book) => {
+      if (book !== null) {
+        setDialogState({
+          message: `Su reserva ha sido creada con código de reserva: ${book.code}. Por favor guarde este número de reserva para futuras referencias y cancelaciones.`,
+          isOpen: true,
+          variant: "success",
+        })
+      } else {
+        setDialogState({
+          message:
+            "Ha ocurrido un error al crear su reserva, por favor inténtelo nuevamente o contactese con nosotros.",
+          isOpen: true,
+          variant: "error",
+        })
+      }
+    })
+    .catch((_) => {
+      setDialogState({
+        message:
+          "Ha ocurrido un error al crear su reserva, por favor inténtelo nuevamente o contactese con nosotros.",
+        isOpen: true,
+        variant: "error",
+      })
+    })
 }
 
 export const bookInitialState = {

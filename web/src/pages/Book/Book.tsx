@@ -44,7 +44,6 @@ export function Book() {
 
       <div className="flex gap-4">
         <BookForm
-          books={books}
           events={events}
           bookState={bookState}
           bookDispatch={bookDispatch}

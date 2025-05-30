@@ -3,6 +3,12 @@ import { dateToString } from "@/lib/helpers"
 import { BookType, EventType } from "@/types"
 import { DAYS, MONTHS } from "@/constants"
 import { Day } from "./Day"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 function isBefore(date: Date, today: Date) {
   return Math.trunc(date.getTime() / 1000) < Math.trunc(today.getTime() / 1000)
@@ -17,14 +23,13 @@ function isToday(date: Date, today: Date) {
 }
 
 function isEventDay(events: EventType[], date: Date) {
-  return events.findIndex((event) => event.date === dateToString(date)) !== -1
+  return events.find((event) => event.date === dateToString(date))
 }
 
 export function Calendar({
   startDate,
   selected,
   onSelect,
-  currentBooks,
   currentEvents,
   maxBookDays,
   latestBookHour,
@@ -32,7 +37,6 @@ export function Calendar({
   startDate: Date
   selected: Date | undefined
   onSelect: (date: Date) => void
-  currentBooks: BookType[]
   currentEvents: EventType[]
   maxBookDays: number
   latestBookHour: number
@@ -54,22 +58,42 @@ export function Calendar({
   const calendarDays = []
   for (let i = 0; i < maxBookDays; i++) {
     // Create Calendar Days
-    calendarDays.push(
-      <Day
-        key={i}
-        selected={selected}
-        onSelect={onSelect}
-        books={currentBooks.filter((book) => book.date === dateToString(sDate))}
-        day={new Date(sDate)}
-        isToday={isToday(sDate, startDate)}
-        disabled={
-          isBefore(sDate, startDate) ||
-          (isToday(sDate, startDate) && !shouldStartToday) ||
-          isEventDay(currentEvents, sDate) ||
-          sDate.getDay() === 1 // Monday is disabled
-        }
-      />
-    )
+    const event = isEventDay(currentEvents, sDate)
+    if (event) {
+      calendarDays.push(
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Day
+                key={i}
+                selected={selected}
+                onSelect={onSelect}
+                day={new Date(sDate)}
+                disabled={true}
+              />
+            </TooltipTrigger>
+            <TooltipContent className="bg-black border border-accent p-3 [&_svg]:stroke-accent [&_svg]:bg-accent [&_svg]:fill-accent">
+              <h1 className="text-accent">{event.name}</h1>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      )
+    } else {
+      calendarDays.push(
+        <Day
+          key={i}
+          selected={selected}
+          onSelect={onSelect}
+          day={new Date(sDate)}
+          disabled={
+            isBefore(sDate, startDate) ||
+            (isToday(sDate, startDate) && !shouldStartToday) ||
+            Boolean() ||
+            sDate.getDay() === 1 // Monday is disabled
+          }
+        />
+      )
+    }
 
     // Move to next day
     sDate.setDate(sDate.getDate() + 1)

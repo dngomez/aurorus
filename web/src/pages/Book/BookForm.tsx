@@ -3,27 +3,39 @@ import { Time } from "./Time"
 import { Location } from "./Location"
 import { People } from "./People"
 import { Button } from "@/components/ui/button"
-import { BookActionType, BookStateType, BookType, EventType } from "@/types"
+import {
+  BookActionType,
+  BookStateType,
+  BookType,
+  DialogStateType,
+  EventType,
+} from "@/types"
 import { LATEST_BOOK_HOUR, MAX_BOOK_DAYS } from "@/constants"
 import { newBook } from "./bookReducer"
 import { cn } from "@/lib/utils"
+import { BookDialog } from "./BookDialog"
+import { useState } from "react"
 
 export function BookForm({
-  books,
   events,
   bookState,
   bookDispatch,
 }: {
-  books: BookType[]
   events: EventType[]
   bookState: BookStateType
   bookDispatch: (_: BookActionType) => void
 }) {
+  const [dialogState, setDialogState] = useState<DialogStateType>({
+    isOpen: false,
+    message: "",
+    variant: "success",
+  })
+
   return (
     <div
       className={cn(
         "flex flex-col gap-4 w-full md:w-1/2 lg:w-1/3",
-        "bg-black/60 p-4 text-center"
+        "bg-black/60 p-4 text-center rounded-md"
       )}
     >
       <h1 className="text-white text-2xl font-bold">Nueva reserva</h1>
@@ -31,7 +43,6 @@ export function BookForm({
         startDate={bookState.today}
         selected={bookState.date}
         onSelect={(value) => bookDispatch({ type: "date", payload: value })}
-        currentBooks={books}
         currentEvents={events}
         maxBookDays={MAX_BOOK_DAYS}
         latestBookHour={LATEST_BOOK_HOUR}
@@ -62,10 +73,14 @@ export function BookForm({
           !bookState.people
         }
         className="bg-aurorus"
-        onClick={() => newBook(bookState)}
+        onClick={() => newBook(bookState, setDialogState)}
       >
         Reservar
       </Button>
+      <BookDialog
+        state={dialogState}
+        close={() => setDialogState({ ...dialogState, isOpen: false })}
+      />
     </div>
   )
 }

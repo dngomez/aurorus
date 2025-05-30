@@ -4,7 +4,7 @@ import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
 
 export function DishDialog({ dish }: { dish: DishType }) {
   return (
-    <div className={cn("text-center")}>
+    <div className={cn("text-center max-h-[80dvh] flex flex-col")}>
       <img
         className={cn("w-1/2 rounded-md object-contain mx-auto mb-4")}
         src={dish.image}
@@ -13,7 +13,7 @@ export function DishDialog({ dish }: { dish: DishType }) {
       <div
         className={cn(
           "flex flex-col gap-2 text-white xl:text-gray-300 xl:group-hover:text-white",
-          "transition-colors"
+          "transition-colors overflow-y-auto"
         )}
       >
         <DialogTitle className="text-2xl font-bold">{dish.name}</DialogTitle>

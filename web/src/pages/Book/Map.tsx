@@ -3,7 +3,8 @@ export function Map({ location }: { location: string }) {
   const isTable = location === "table"
 
   return (
-    <div className="hidden md:flex md:w-1/2 lg:w-2/3 pl-10 bg-black/60 p-4 rounded-md">
+    <div className="hidden md:flex md:flex-col md:w-1/2 lg:w-2/3 pl-10 bg-black/60 p-4 rounded-md">
+      <h1 className="text-center text-white text-2xl font-bold mb-4">Mapa</h1>
       <svg
         width="100%"
         height="100%"

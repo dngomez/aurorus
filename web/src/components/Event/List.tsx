@@ -1,4 +1,4 @@
-import { EventType } from "@/types"
+import type { EventType } from "@/types"
 import { Event } from "./Event"
 
 export function List({ events }: { events: EventType[] }) {

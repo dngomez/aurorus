@@ -61,3 +61,11 @@ export interface BookActionType {
   type: string
   payload: any
 }
+
+export type DialogVariantType = "success" | "error"
+
+export interface DialogStateType {
+  isOpen: boolean
+  message: string
+  variant: DialogVariantType
+}
