@@ -1,9 +1,10 @@
+// TODO: Import from backend
 export const BAR_PEOPLE = 9
 export const TABLE_PEOPLE = 6
-export const TABLE_NUMBER = 3
+export const TABLES = 3
 export const TABLE_USAGE_TIME = 60
-export const MAX_BOOK_DAYS = 14
-export const LATEST_BOOK_HOUR = 18
+export const MAX_BOOK_ANTICIPATION = 14
+export const LATEST_BOOK_TIME_SAME_DAY = 18
 
 export const DAYS = [
   { letter: "L", name: "lunes", number: 1 },

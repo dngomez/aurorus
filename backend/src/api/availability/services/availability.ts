@@ -1,0 +1,5 @@
+/**
+ * availability service
+ */
+
+export default () => ({});

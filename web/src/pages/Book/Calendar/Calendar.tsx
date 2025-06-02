@@ -61,9 +61,9 @@ export function Calendar({
     const event = isEventDay(currentEvents, sDate)
     if (event) {
       calendarDays.push(
-        <TooltipProvider>
+        <TooltipProvider key={i}>
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Day
                 key={i}
                 selected={selected}

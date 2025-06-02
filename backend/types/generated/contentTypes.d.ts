@@ -446,6 +446,39 @@ export interface ApiClientClient extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConstantConstant extends Struct.SingleTypeSchema {
+  collectionName: 'constants';
+  info: {
+    displayName: 'Constant';
+    pluralName: 'constants';
+    singularName: 'constant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    BAR_PEOPLE: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    LATEST_BOOK_TIME_SAME_DAY: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::constant.constant'
+    > &
+      Schema.Attribute.Private;
+    MAX_BOOK_ANTICIPATION: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    TABLE_PEOPLE: Schema.Attribute.Integer;
+    TABLE_USAGE_TIME: Schema.Attribute.Integer;
+    TABLES: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   collectionName: 'events';
   info: {
@@ -1044,6 +1077,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::book.book': ApiBookBook;
       'api::client.client': ApiClientClient;
+      'api::constant.constant': ApiConstantConstant;
       'api::event.event': ApiEventEvent;
       'api::home.home': ApiHomeHome;
       'plugin::content-releases.release': PluginContentReleasesRelease;

@@ -7,6 +7,7 @@ import { checkLocationIsAvailable } from "./Validation/location"
 import { Layout } from "@/components/Layout"
 import { BookForm } from "./BookForm"
 import { bookInitialState, bookReducer } from "./bookReducer"
+import { getAvailability } from "@/strapi/availability"
 
 export function Book() {
   const [bookState, bookDispatch] = useReducer(bookReducer, bookInitialState)
@@ -21,6 +22,10 @@ export function Book() {
 
     getEventsInRange(bookState.today, bookState.endDate).then((events) => {
       setEvents(events)
+    })
+
+    getAvailability(bookState.today, bookState.endDate).then((availability) => {
+      console.log(availability)
     })
   }, [bookState.today, bookState.endDate])
 

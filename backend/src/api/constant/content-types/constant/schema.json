@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "constants",
+  "info": {
+    "singularName": "constant",
+    "pluralName": "constants",
+    "displayName": "Constant"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "BAR_PEOPLE": {
+      "type": "integer"
+    },
+    "TABLE_PEOPLE": {
+      "type": "integer"
+    },
+    "TABLES": {
+      "type": "integer"
+    },
+    "TABLE_USAGE_TIME": {
+      "type": "integer"
+    },
+    "MAX_BOOK_ANTICIPATION": {
+      "type": "integer"
+    },
+    "LATEST_BOOK_TIME_SAME_DAY": {
+      "type": "integer"
+    }
+  }
+}
