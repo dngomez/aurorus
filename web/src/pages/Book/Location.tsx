@@ -11,15 +11,17 @@ export function Location({
   locationOptions,
   location,
   setLocation,
+  disabled,
 }: {
   locationOptions: LocationOptionsType[]
   location: string
   setLocation: (location: string) => void
+  disabled: boolean
 }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <h1>Ubicación</h1>
-      <Select onValueChange={(value) => setLocation(value)}>
+      <Select onValueChange={(value) => setLocation(value)} disabled={disabled}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Ubicación" />
         </SelectTrigger>

@@ -1,4 +1,4 @@
-import { LOCATION_OPTIONS, MAX_BOOK_DAYS } from "@/constants"
+import { LOCATION_OPTIONS, MAX_BOOK_ANTICIPATION } from "@/constants"
 import { dateToString } from "@/lib/helpers"
 import { createBook } from "@/strapi/book"
 import type {
@@ -6,6 +6,7 @@ import type {
   BookStateType,
   BookType,
   DialogStateType,
+  LocationOptionsType,
 } from "@/types"
 
 export function bookReducer(state: BookStateType, action: BookActionType) {
@@ -19,11 +20,20 @@ export function bookReducer(state: BookStateType, action: BookActionType) {
     case "date":
       return { ...state, date: action.payload }
     case "locationOptions":
+      if (!action.payload?.map((l: LocationOptionsType) => l.value).includes(state.location)) {
+        return { ...state, location: "", locationOptions: action.payload }
+      }
       return { ...state, locationOptions: action.payload }
-    case "peopleOptions":
-      return { ...state, peopleOptions: action.payload }
     case "timeOptions":
+      if (!action.payload?.includes(state.time)) {
+        return { ...state, time: "", timeOptions: action.payload }
+      }
       return { ...state, timeOptions: action.payload }
+    case "peopleOptions":
+      if (!action.payload?.includes(state.people)) {
+        return { ...state, people: 0, peopleOptions: action.payload }
+      }
+      return { ...state, peopleOptions: action.payload }
     default:
       return state
   }
@@ -71,12 +81,12 @@ export function newBook(
 
 export const bookInitialState = {
   location: "",
-  locationOptions: LOCATION_OPTIONS,
+  locationOptions: [],
   time: "",
   timeOptions: [],
   people: 0,
   peopleOptions: [],
   date: undefined,
   today: new Date(),
-  endDate: new Date(new Date().setDate(new Date().getDate() + MAX_BOOK_DAYS)),
+  endDate: new Date(new Date().setDate(new Date().getDate() + MAX_BOOK_ANTICIPATION)),
 }

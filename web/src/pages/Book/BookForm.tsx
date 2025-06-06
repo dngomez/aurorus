@@ -3,14 +3,13 @@ import { Time } from "./Time"
 import { Location } from "./Location"
 import { People } from "./People"
 import { Button } from "@/components/ui/button"
-import {
+import type {
   BookActionType,
   BookStateType,
-  BookType,
   DialogStateType,
   EventType,
 } from "@/types"
-import { LATEST_BOOK_HOUR, MAX_BOOK_DAYS } from "@/constants"
+import { LATEST_BOOK_TIME_SAME_DAY, MAX_BOOK_ANTICIPATION } from "@/constants"
 import { newBook } from "./bookReducer"
 import { cn } from "@/lib/utils"
 import { BookDialog } from "./BookDialog"
@@ -44,8 +43,8 @@ export function BookForm({
         selected={bookState.date}
         onSelect={(value) => bookDispatch({ type: "date", payload: value })}
         currentEvents={events}
-        maxBookDays={MAX_BOOK_DAYS}
-        latestBookHour={LATEST_BOOK_HOUR}
+        maxBookDays={MAX_BOOK_ANTICIPATION}
+        latestBookHour={LATEST_BOOK_TIME_SAME_DAY}
       />
       <Location
         locationOptions={bookState.locationOptions}
@@ -53,17 +52,19 @@ export function BookForm({
         setLocation={(location) =>
           bookDispatch({ type: "location", payload: location })
         }
+        disabled={!(bookState.locationOptions?.length > 0)}
+      />
+      <Time
+        timeOptions={bookState.timeOptions}
+        setTime={(time) => bookDispatch({ type: "time", payload: time })}
+        disabled={!(bookState.timeOptions?.length > 0)}
       />
       <People
-        people={bookState.people}
+        peopleOptions={bookState.peopleOptions}
         setPeople={(people) =>
           bookDispatch({ type: "people", payload: people })
         }
-      />
-      <Time
-        location={bookState.location}
-        setTime={(time) => bookDispatch({ type: "time", payload: time })}
-        disabled={!bookState.date || !bookState.location}
+        disabled={!(bookState.peopleOptions?.length > 0)}
       />
       <Button
         disabled={

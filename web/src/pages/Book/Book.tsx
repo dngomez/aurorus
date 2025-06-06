@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useState } from "react"
-import { getBooksInRange } from "@/strapi/book"
 import { Map } from "./Map"
 import { getEventsInRange } from "@/strapi/event"
 import { List } from "@/components/Event/List"
@@ -8,35 +7,60 @@ import { Layout } from "@/components/Layout"
 import { BookForm } from "./BookForm"
 import { bookInitialState, bookReducer } from "./bookReducer"
 import { getAvailability } from "@/strapi/availability"
+import { DayAvailabilityType } from "@/types"
+import { timeAvailableOptions } from "./Validation/time"
+import { totalPlaces } from "./Validation/places"
 
 export function Book() {
   const [bookState, bookDispatch] = useReducer(bookReducer, bookInitialState)
-  const [books, setBooks] = useState([])
   const [events, setEvents] = useState([])
+  const [availability, setAvailability] = useState<DayAvailabilityType[]>([])
 
   useEffect(() => {
-    getBooksInRange(bookState.today, bookState.endDate).then((books) => {
-      setBooks(books)
-      // TODO: Calculate free spaces for each day
-    })
-
     getEventsInRange(bookState.today, bookState.endDate).then((events) => {
       setEvents(events)
     })
 
     getAvailability(bookState.today, bookState.endDate).then((availability) => {
-      console.log(availability)
+      setAvailability(availability)
     })
   }, [bookState.today, bookState.endDate])
 
   // Check if location is still available
   useEffect(() => {
+    if (!bookState.date) return
     bookDispatch({
       type: "locationOptions",
-      payload: checkLocationIsAvailable(books, bookState.date),
+      payload: checkLocationIsAvailable(availability, bookState.date),
     })
-    // setPeopleOptions(checkSpacesAvailable({ location, books, date }))
-  }, [location, books, bookState.date])
+  }, [availability, bookState.date])
+
+  // Check time options
+  useEffect(() => {
+    if (!bookState.date || !bookState.location) return
+    bookDispatch({
+      type: "timeOptions",
+      payload: timeAvailableOptions(
+        availability,
+        bookState.date,
+        bookState.location
+      )
+    })
+  }, [availability, bookState.date, bookState.location])
+
+  // Check people options
+  useEffect(() => {
+    if (!bookState.date || !bookState.location || !bookState.time) return
+    bookDispatch({
+      type: "peopleOptions",
+      payload: totalPlaces(
+        availability,
+        bookState.date,
+        bookState.location,
+        bookState.time
+      ),
+    })
+  }, [availability, bookState.date, bookState.location, bookState.time])
 
   return (
     <Layout title="Reservas">

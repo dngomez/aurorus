@@ -1,10 +1,20 @@
 // TODO: Import from backend
 export const BAR_PEOPLE = 9
+export const MAX_BOOK_PEOPLE = 4
 export const TABLE_PEOPLE = 6
 export const TABLES = 3
 export const TABLE_USAGE_TIME = 60
+export const TABLE_TIME_STEP = 15
 export const MAX_BOOK_ANTICIPATION = 14
 export const LATEST_BOOK_TIME_SAME_DAY = 18
+export const BAR_TIME_OPTIONS = ["19:00", "21:00"]
+export const OPENNING_TIME = "19:00"
+export const CLOSING_TIME = "23:00"
+
+export const LOCATION_OPTIONS = [
+  { value: "bar", label: "Barra" },
+  { value: "table", label: "Mesa" },
+]
 
 export const DAYS = [
   { letter: "L", name: "lunes", number: 1 },
@@ -29,11 +39,6 @@ export const MONTHS = [
   { letter: "Oct", name: "Octubre", number: 10 },
   { letter: "Nov", name: "Noviembre", number: 11 },
   { letter: "Dic", name: "Diciembre", number: 12 },
-]
-
-export const LOCATION_OPTIONS = [
-  { value: "bar", label: "Barra" },
-  { value: "table", label: "Mesa" },
 ]
 
 export const DISHES = [

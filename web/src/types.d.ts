@@ -19,13 +19,12 @@ export interface BookType {
   createdAt: string
   updatedAt: string
   publishedAt: string
-  locale: string
   date: string
   time: string
   comment: any
   people: number
-  email: string
-  phone: string
+  email: string | null
+  phone: string | null
   confirmed: boolean
   code: string
   location: string
@@ -68,4 +67,37 @@ export interface DialogStateType {
   isOpen: boolean
   message: string
   variant: DialogVariantType
+}
+
+export interface DayAvailabilityType {
+  date: string
+  bar: BarAvailabilityType
+  tables: AllTablesAvailabilityType
+}
+
+export interface BarAvailabilityType {
+  available: boolean
+  availableOptions: string[]
+  availability: BarTimeAvailabilityType[]
+}
+
+export interface BarTimeAvailabilityType {
+  time: string
+  places: number
+}
+
+export interface AllTablesAvailabilityType {
+  availableOptions: string[]
+  tablesAvailability: TableAvailabilityType[]
+}
+
+export interface TableAvailabilityType {
+  table: number
+  available: boolean
+  windows: WindowAvailabilityType[]
+}
+
+export interface WindowAvailabilityType {
+  start: number
+  end: number
 }

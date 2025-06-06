@@ -5,28 +5,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { BiEnvelope } from "react-icons/bi"
-import { FaInfoCircle, FaInstagram, FaWhatsapp } from "react-icons/fa"
 
 export function People({
-  people,
+  peopleOptions,
   setPeople,
+  disabled,
 }: {
-  people: number
+  peopleOptions: number[]
   setPeople: (people: number) => void
+  disabled: boolean
 }) {
   return (
     <div className="flex flex-col gap-2 w-full">
       <h1>Personas</h1>
-      <Select onValueChange={(value) => setPeople(parseInt(value))}>
+      <Select onValueChange={(value) => setPeople(parseInt(value))} disabled={disabled}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Personas" />
         </SelectTrigger>
         <SelectContent className="bg-gray-700 text-white">
-          <SelectItem value="1">1</SelectItem>
-          <SelectItem value="2">2</SelectItem>
-          <SelectItem value="3">3</SelectItem>
-          <SelectItem value="4">4</SelectItem>
+          {peopleOptions.map((o) => (
+            <SelectItem key={o} value={o.toString()}>
+              {o}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
     </div>
