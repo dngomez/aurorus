@@ -378,7 +378,7 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
     singularName: 'book';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     client: Schema.Attribute.Relation<'manyToOne', 'api::client.client'>;
@@ -414,12 +414,13 @@ export interface ApiBookBook extends Struct.CollectionTypeSchema {
 export interface ApiClientClient extends Struct.CollectionTypeSchema {
   collectionName: 'clients';
   info: {
+    description: '';
     displayName: 'Client';
     pluralName: 'clients';
     singularName: 'client';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     banned: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -449,15 +450,18 @@ export interface ApiClientClient extends Struct.CollectionTypeSchema {
 export interface ApiConstantConstant extends Struct.SingleTypeSchema {
   collectionName: 'constants';
   info: {
+    description: '';
     displayName: 'Constant';
     pluralName: 'constants';
     singularName: 'constant';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     BAR_PEOPLE: Schema.Attribute.Integer;
+    BAR_TIME_OPTIONS: Schema.Attribute.JSON;
+    CLOSING_TIME: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -469,8 +473,11 @@ export interface ApiConstantConstant extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     MAX_BOOK_ANTICIPATION: Schema.Attribute.Integer;
+    MAX_BOOK_PEOPLE: Schema.Attribute.Integer;
+    OPENING_TIME: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     TABLE_PEOPLE: Schema.Attribute.Integer;
+    TABLE_TIME_STEP: Schema.Attribute.Integer;
     TABLE_USAGE_TIME: Schema.Attribute.Integer;
     TABLES: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
@@ -482,38 +489,24 @@ export interface ApiConstantConstant extends Struct.SingleTypeSchema {
 export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   collectionName: 'events';
   info: {
+    description: '';
     displayName: 'Event';
     pluralName: 'events';
     singularName: 'event';
   };
   options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
-    description: Schema.Attribute.Blocks &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'>;
-    name: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     time: Schema.Attribute.Time;
     updatedAt: Schema.Attribute.DateTime;
@@ -525,17 +518,13 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
 export interface ApiHomeHome extends Struct.SingleTypeSchema {
   collectionName: 'homes';
   info: {
+    description: '';
     displayName: 'Home';
     pluralName: 'homes';
     singularName: 'home';
   };
   options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
+    draftAndPublish: false;
   };
   attributes: {
     cover: Schema.Attribute.Media<'images' | 'files'> &
@@ -543,23 +532,12 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'>;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'> &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

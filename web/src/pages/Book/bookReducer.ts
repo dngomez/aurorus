@@ -1,4 +1,4 @@
-import { LOCATION_OPTIONS, MAX_BOOK_ANTICIPATION } from "@/constants"
+import { MAX_BOOK_ANTICIPATION } from "@/constants"
 import { dateToString } from "@/lib/helpers"
 import { createBook } from "@/strapi/book"
 import type {
@@ -20,7 +20,11 @@ export function bookReducer(state: BookStateType, action: BookActionType) {
     case "date":
       return { ...state, date: action.payload }
     case "locationOptions":
-      if (!action.payload?.map((l: LocationOptionsType) => l.value).includes(state.location)) {
+      if (
+        !action.payload
+          ?.map((l: LocationOptionsType) => l.value)
+          .includes(state.location)
+      ) {
         return { ...state, location: "", locationOptions: action.payload }
       }
       return { ...state, locationOptions: action.payload }
@@ -34,6 +38,8 @@ export function bookReducer(state: BookStateType, action: BookActionType) {
         return { ...state, people: 0, peopleOptions: action.payload }
       }
       return { ...state, peopleOptions: action.payload }
+    case "reset":
+      return bookInitialState
     default:
       return state
   }
@@ -41,7 +47,8 @@ export function bookReducer(state: BookStateType, action: BookActionType) {
 
 export function newBook(
   book: BookStateType,
-  setDialogState: (state: DialogStateType) => void
+  setDialogState: (state: DialogStateType) => void,
+  reset: () => void
 ) {
   const bookCode = Math.floor(new Date().getTime() / 1000).toString(36)
 
@@ -68,6 +75,7 @@ export function newBook(
           variant: "error",
         })
       }
+      reset()
     })
     .catch((_) => {
       setDialogState({
@@ -76,6 +84,7 @@ export function newBook(
         isOpen: true,
         variant: "error",
       })
+      reset()
     })
 }
 
@@ -88,5 +97,7 @@ export const bookInitialState = {
   peopleOptions: [],
   date: undefined,
   today: new Date(),
-  endDate: new Date(new Date().setDate(new Date().getDate() + MAX_BOOK_ANTICIPATION)),
+  endDate: new Date(
+    new Date().setDate(new Date().getDate() + MAX_BOOK_ANTICIPATION)
+  ),
 }

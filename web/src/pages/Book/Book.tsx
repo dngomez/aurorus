@@ -44,7 +44,7 @@ export function Book() {
         availability,
         bookState.date,
         bookState.location
-      )
+      ),
     })
   }, [availability, bookState.date, bookState.location])
 

@@ -4,10 +4,11 @@
   "info": {
     "singularName": "constant",
     "pluralName": "constants",
-    "displayName": "Constant"
+    "displayName": "Constant",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "attributes": {
     "BAR_PEOPLE": {
@@ -27,6 +28,21 @@
     },
     "LATEST_BOOK_TIME_SAME_DAY": {
       "type": "integer"
+    },
+    "MAX_BOOK_PEOPLE": {
+      "type": "integer"
+    },
+    "TABLE_TIME_STEP": {
+      "type": "integer"
+    },
+    "OPENING_TIME": {
+      "type": "string"
+    },
+    "CLOSING_TIME": {
+      "type": "string"
+    },
+    "BAR_TIME_OPTIONS": {
+      "type": "json"
     }
   }
 }

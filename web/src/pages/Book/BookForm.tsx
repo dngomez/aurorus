@@ -74,7 +74,11 @@ export function BookForm({
           !bookState.people
         }
         className="bg-aurorus"
-        onClick={() => newBook(bookState, setDialogState)}
+        onClick={() =>
+          newBook(bookState, setDialogState, () =>
+            bookDispatch({ type: "reset", payload: {} })
+          )
+        }
       >
         Reservar
       </Button>
